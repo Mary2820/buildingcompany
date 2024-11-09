@@ -1,7 +1,7 @@
-package com.solvd.buildingcompany;
+package com.solvd.buildingcompany.enums;
 
 public enum BuildingType {
-    RESIDENTIAL_BUILDING,
     INDUSTRIAL_BUILDING,
+    RESIDENTIAL_BUILDING,
     GOVERNMENT_INSTITUTION
 }
