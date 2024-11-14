@@ -4,14 +4,15 @@ import com.solvd.buildingcompany.models.Project;
 import com.solvd.buildingcompany.models.building.components.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Building {
     private boolean isBuilt;
     private Foundation foundation;
     private Wall[] walls;
     private Roof roof;
-    private ArrayList<Door> doors;
-    private ArrayList<Window> windows;
+    private List<Door> doors;
+    private List<Window> windows;
     private ElectricalSystem electricalSystem;
     private PlumbingSystem plumbingSystem;
     private GasSystem gasSystem;
@@ -45,19 +46,19 @@ public class Building {
         this.roof = roof;
     }
 
-    public ArrayList<Door> getDoors() {
+    public List<Door> getDoors() {
         return doors;
     }
 
-    public void setDoors(ArrayList<Door> doors) {
+    public void setDoors(List<Door> doors) {
         this.doors = doors;
     }
 
-    public ArrayList<Window> getWindows() {
+    public List<Window> getWindows() {
         return windows;
     }
 
-    public void setWindows(ArrayList<Window> windows) {
+    public void setWindows(List<Window> windows) {
         this.windows = windows;
     }
 

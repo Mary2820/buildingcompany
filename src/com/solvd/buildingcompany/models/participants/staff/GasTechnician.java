@@ -58,6 +58,7 @@ public class GasTechnician extends Employee{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (hashCode() != o.hashCode()) return false;
         GasTechnician gasTechnician = (GasTechnician) o;
         return Objects.equals(hasSafetyCertificate(), gasTechnician.hasSafetyCertificate());
     }

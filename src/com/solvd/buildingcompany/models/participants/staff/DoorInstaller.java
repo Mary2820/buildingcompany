@@ -6,6 +6,7 @@ import com.solvd.buildingcompany.models.building.Building;
 import com.solvd.buildingcompany.models.building.components.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class DoorInstaller extends Employee{
@@ -69,6 +70,7 @@ public class DoorInstaller extends Employee{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (hashCode() != o.hashCode()) return false;
         DoorInstaller doorInstaller = (DoorInstaller) o;
         return Objects.equals(hasCompletedTraining, doorInstaller.hasCompletedTraining() );
     }
@@ -84,7 +86,7 @@ public class DoorInstaller extends Employee{
     }
 
     private void installWindows(Building building, int windowsCount) {
-        ArrayList<Window> windows = new ArrayList<>();
+        List<Window> windows = new ArrayList<>();
         for (int i = 0; i <= windowsCount; i++) {
             windows.add(new Window(1.5, 1.2, 0.05, "double-pane glass"));
         }
@@ -92,7 +94,7 @@ public class DoorInstaller extends Employee{
     }
 
     private void installDoors(Building building, int doorsCount) {
-        ArrayList<Door> doors = new ArrayList<>();
+        List<Door> doors = new ArrayList<>();
         for (int i = 0; i <= doorsCount; i++) {
             doors.add(new Door(0.9, 2, true));
         }

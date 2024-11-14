@@ -58,6 +58,7 @@ public class Electrician extends Employee{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (hashCode() != o.hashCode()) return false;
         Electrician electrician = (Electrician) o;
         return Objects.equals(hasSafetyCertificate(), electrician.hasSafetyCertificate());
     }

@@ -57,6 +57,7 @@ public class Plumber extends Employee{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (hashCode() != o.hashCode()) return false;
         Plumber plumber = (Plumber) o;
         return Objects.equals(getServiceArea(), plumber.getServiceArea());
     }

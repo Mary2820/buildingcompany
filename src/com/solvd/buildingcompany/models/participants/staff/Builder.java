@@ -7,7 +7,6 @@ import com.solvd.buildingcompany.models.building.components.Roof;
 import com.solvd.buildingcompany.models.building.components.Wall;
 
 import java.util.Arrays;
-import java.util.Objects;
 
 public class Builder extends Employee{
     public static final int MASK = 1;
@@ -76,6 +75,7 @@ public class Builder extends Employee{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (hashCode() != o.hashCode()) return false;
         Builder builder = (Builder) o;
         return Arrays.equals(getSkills(), builder.getSkills());
     }

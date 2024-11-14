@@ -4,15 +4,16 @@ import com.solvd.buildingcompany.models.participants.Customer;
 import com.solvd.buildingcompany.models.participants.staff.Employee;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Company {
     private String name;
     private String phoneNumber;
-    private ArrayList<Project> projects;
-    private ArrayList<Customer> customers;
+    private List<Project> projects;
+    private List<Customer> customers;
 
-    public Company(String name, String phoneNumber, ArrayList<Project> projects,
-                   ArrayList<Customer> customers) {
+    public Company(String name, String phoneNumber, List<Project> projects,
+                   List<Customer> customers) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.projects = projects;
@@ -35,19 +36,19 @@ public class Company {
         this.phoneNumber = phoneNumber;
     }
 
-    public ArrayList<Project> getProjects() {
+    public List<Project> getProjects() {
         return projects;
     }
 
-    public void setProjects(ArrayList<Project> projects) {
+    public void setProjects(List<Project> projects) {
         this.projects = projects;
     }
 
-    public ArrayList<Customer> getCustomers() {
+    public List<Customer> getCustomers() {
         return customers;
     }
 
-    public void setCustomers(ArrayList<Customer> customers) {
+    public void setCustomers(List<Customer> customers) {
         this.customers = customers;
     }
 
