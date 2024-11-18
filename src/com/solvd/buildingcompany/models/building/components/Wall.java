@@ -11,6 +11,8 @@ public class Wall {
         this.thickness = thickness;
     }
 
+    public Wall() {}
+
     public int getWidth() {
         return width;
     }

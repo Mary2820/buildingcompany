@@ -1,24 +1,25 @@
 package com.solvd.buildingcompany.models.participants.staff;
 
 import com.solvd.buildingcompany.enums.BuildingStage;
+import com.solvd.buildingcompany.interfaces.ITrainEmployee;
 import com.solvd.buildingcompany.models.Project;
 import com.solvd.buildingcompany.models.building.Building;
 
-public class ConstructionEngineer extends Employee{
-    private String specialization;
+public class ConstructionEngineer extends Employee implements ITrainEmployee {
+    private int salary;
 
-    public ConstructionEngineer(String name, String lastName, int yearsOfExperience, boolean isManagement) {
+    public ConstructionEngineer(String name, String lastName, int yearsOfExperience) {
         super(name, lastName, yearsOfExperience);
-
-        this.isManagement = isManagement;
     }
 
-    public String getSpecialization() {
-        return specialization;
+    public ConstructionEngineer() {super();}
+
+    public int getSalary() {
+        return salary;
     }
 
-    public void setSpecialization(String specialization) {
-        this.specialization = specialization;
+    public void setSalary(int salary) {
+        this.salary = salary;
     }
 
     @Override
@@ -56,12 +57,8 @@ public class ConstructionEngineer extends Employee{
         project.setCompleted(true);
     }
 
-    public void assignEmployeesTasks(Employee[] projectTeam, Building building) {
-        for (Employee employee : projectTeam){
-            if(employee.isManagement){
-                continue;
-            }
-
+    public void assignEmployeesTasks(Employee[] team, Building building) {
+        for (Employee employee : team){
             assignEmployeeTask(employee, building);
         }
     }
@@ -72,5 +69,27 @@ public class ConstructionEngineer extends Employee{
                     employee.getName(), employee.getLastName());
             employee.work(building, stage);
         }
+    }
+
+    @Override
+    public void ReportIncident(String incidentDetails) {
+        System.out.println("Construction engineer reports an incident: " + incidentDetails);
+
+    }
+
+    @Override
+    public void ExecuteEmergencyProtocol() {
+        System.out.println("Construction engineer leaves the construction site and notifies the company of the incident.");
+    }
+
+    @Override
+    public String AssessDamage() {
+        System.out.println("Construction engineer is assessing damage.");
+        return "Damage assessment completed.";
+    }
+
+    @Override
+    public void provideTraining(String trainingTopic, Employee employee) {
+        System.out.printf("Engineer provides %s training for %s", trainingTopic, employee);
     }
 }

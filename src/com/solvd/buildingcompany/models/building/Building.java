@@ -3,7 +3,6 @@ package com.solvd.buildingcompany.models.building;
 import com.solvd.buildingcompany.models.Project;
 import com.solvd.buildingcompany.models.building.components.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Building {
@@ -21,6 +20,8 @@ public class Building {
     public Building(Project project) {
         this.project = project;
     }
+
+    public Building() {}
 
     public Foundation getFoundation() {
         return foundation;

@@ -9,6 +9,8 @@ public class Foundation {
         this.material = material;
     }
 
+    public Foundation() {}
+
     public double getArea() {
         return area;
     }

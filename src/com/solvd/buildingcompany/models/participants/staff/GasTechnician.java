@@ -7,7 +7,7 @@ import com.solvd.buildingcompany.models.building.components.GasSystem;
 import java.util.Objects;
 
 public class GasTechnician extends Employee{
-    public static final int MASK = 4;
+    private static final int MASK = 4;
     private boolean hasSafetyCertificate;
 
     public GasTechnician(String name, String lastName, int yearsOfExperience, BuildingStage[] responsibilities) {
@@ -15,6 +15,8 @@ public class GasTechnician extends Employee{
 
         setResponsibilities(responsibilities);
     }
+
+    public GasTechnician() {super();}
 
     public boolean hasSafetyCertificate() {
         return hasSafetyCertificate;
@@ -71,5 +73,23 @@ public class GasTechnician extends Employee{
     @Override
     public String toString() {
         return "GasTechnician{" + "name=" + getName() + ", lastName=" + getLastName() + '}';
+    }
+
+    @Override
+    public void ReportIncident(String incidentDetails) {
+        System.out.println("Gas technician reports an incident: " + incidentDetails);
+    }
+
+    @Override
+    public void ExecuteEmergencyProtocol() {
+        System.out.println("Gas technician leaves the construction site and notifies the construction engineer of" +
+                " the incident.");
+
+    }
+
+    @Override
+    public String AssessDamage() {
+        System.out.println("Gas technician is assessing damage.");
+        return "Damage assessment completed.";
     }
 }

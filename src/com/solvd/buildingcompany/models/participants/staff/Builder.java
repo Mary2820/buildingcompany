@@ -9,7 +9,7 @@ import com.solvd.buildingcompany.models.building.components.Wall;
 import java.util.Arrays;
 
 public class Builder extends Employee{
-    public static final int MASK = 1;
+    private static final int MASK = 1;
     private String[] skills;
 
     public Builder(String name, String lastName, int yearsOfExperience, BuildingStage[] responsibilities) {
@@ -17,6 +17,8 @@ public class Builder extends Employee{
 
         setResponsibilities(responsibilities);
     }
+
+    public Builder() {super();}
 
     public String[] getSkills() {
         return skills;
@@ -88,5 +90,21 @@ public class Builder extends Employee{
     @Override
     public String toString() {
         return "Builder{" + "name=" + getName() + ", lastName=" + getLastName() + '}';
+    }
+
+    @Override
+    public void ReportIncident(String incidentDetails) {
+        System.out.println("Builder reports an incident: " + incidentDetails);
+    }
+
+    @Override
+    public void ExecuteEmergencyProtocol() {
+        System.out.println("Builder leaves the construction site and notifies the construction engineer of the incident.");
+    }
+
+    @Override
+    public String AssessDamage() {
+        System.out.println("Builder is assessing damage.");
+        return "Damage assessment completed.";
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class DoorInstaller extends Employee{
-    public static final int MASK = 2;
+    private static final int MASK = 2;
     private boolean hasCompletedTraining;
 
     public DoorInstaller(String name, String lastName, int yearsOfExperience, BuildingStage[] responsibilities) {
@@ -18,6 +18,8 @@ public class DoorInstaller extends Employee{
 
         setResponsibilities(responsibilities);
     }
+
+    public DoorInstaller() {super();}
 
     public boolean hasCompletedTraining() {
         return hasCompletedTraining;
@@ -99,5 +101,23 @@ public class DoorInstaller extends Employee{
             doors.add(new Door(0.9, 2, true));
         }
         building.setDoors(doors);
+    }
+
+    @Override
+    public void ReportIncident(String incidentDetails) {
+        System.out.println("Door installer reports an incident: " + incidentDetails);
+    }
+
+    @Override
+    public void ExecuteEmergencyProtocol() {
+        System.out.println("Door installer leaves the construction site and notifies the construction engineer of" +
+                " the incident.");
+
+    }
+
+    @Override
+    public String AssessDamage() {
+        System.out.println("Door installer is assessing damage.");
+        return "Damage assessment completed.";
     }
 }

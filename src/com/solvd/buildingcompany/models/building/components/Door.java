@@ -11,6 +11,8 @@ public class Door {
         this.hasLock = hasLock;
     }
 
+    public Door() {}
+
     public double getWidth() {
         return width;
     }

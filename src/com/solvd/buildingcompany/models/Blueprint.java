@@ -15,6 +15,8 @@ public class Blueprint {
         this.doorsCount = doorsCount;
     }
 
+    public Blueprint() {}
+
     public int getFloorCount() {
         return floorCount;
     }

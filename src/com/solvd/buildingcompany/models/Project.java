@@ -1,21 +1,27 @@
 package com.solvd.buildingcompany.models;
 
 import com.solvd.buildingcompany.enums.BuildingType;
+import com.solvd.buildingcompany.interfaces.IManageSchedule;
 import com.solvd.buildingcompany.models.participants.staff.Employee;
 
-public class Project {
+import java.time.LocalDate;
+
+public class Project implements IManageSchedule {
     private boolean isCompleted;
     private double budget;
     private String address;
     private BuildingType buildingType;
     private Blueprint blueprint;
     private Employee[] team;
+    private LocalDate deadlineDate;
 
     public Project(BuildingType buildingType, double budget, String address) {
         this.buildingType = buildingType;
         this.budget = budget;
         this.address = address;
     }
+
+    public Project(){}
 
     public BuildingType getBuildingType() {
         return buildingType;
@@ -64,5 +70,16 @@ public class Project {
 
     public void setTeam(Employee[] team) {
         this.team = team;
+    }
+
+    @Override
+    public void setDeadlineDate(LocalDate date) {
+        this.deadlineDate = date;
+        System.out.println("Schedule for the project set to: " + date);
+    }
+
+    @Override
+    public LocalDate getDeadlineDate() {
+        return deadlineDate;
     }
 }

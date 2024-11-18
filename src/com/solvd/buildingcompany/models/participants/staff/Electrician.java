@@ -7,7 +7,7 @@ import com.solvd.buildingcompany.models.building.components.ElectricalSystem;
 import java.util.Objects;
 
 public class Electrician extends Employee{
-    public static final int MASK = 3;
+    private static final int MASK = 3;
     private boolean hasSafetyCertificate;
 
     public Electrician(String name, String lastName, int yearsOfExperience, BuildingStage[] responsibilities) {
@@ -15,6 +15,8 @@ public class Electrician extends Employee{
 
         setResponsibilities(responsibilities);
     }
+
+    public Electrician() {super();}
 
     public boolean hasSafetyCertificate() {
         return hasSafetyCertificate;
@@ -71,5 +73,21 @@ public class Electrician extends Employee{
     @Override
     public String toString() {
         return "Electrician{" + "name=" + getName() + ", lastName=" + getLastName() + '}';
+    }
+
+    @Override
+    public void ReportIncident(String incidentDetails) {
+        System.out.println("Electrician reports an incident: " + incidentDetails);
+    }
+
+    @Override
+    public void ExecuteEmergencyProtocol() {
+        System.out.println("Electrician leaves the construction site and notifies the construction engineer of the incident.");
+    }
+
+    @Override
+    public String AssessDamage() {
+        System.out.println("Electrician is assessing damage.");
+        return "Damage assessment completed.";
     }
 }

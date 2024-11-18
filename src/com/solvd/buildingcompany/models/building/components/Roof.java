@@ -11,6 +11,8 @@ public class Roof {
         this.area = area;
     }
 
+    public Roof() {}
+
     public String getRoofType() {
         return roofType;
     }

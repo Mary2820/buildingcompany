@@ -18,6 +18,8 @@ public class Inspector {
         this.licenseNumber = licenseNumber;
     }
 
+    public Inspector() {}
+
     public String getName() {
         return name;
     }

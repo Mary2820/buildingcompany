@@ -7,7 +7,7 @@ import com.solvd.buildingcompany.models.building.components.PlumbingSystem;
 import java.util.Objects;
 
 public class Plumber extends Employee{
-    public static final int MASK = 5;
+    private static final int MASK = 5;
     private String serviceArea;
 
     public Plumber(String name, String lastName, int yearsOfExperience, BuildingStage[] responsibilities) {
@@ -15,6 +15,8 @@ public class Plumber extends Employee{
 
         setResponsibilities(responsibilities);
     }
+
+    public Plumber() {super();}
 
     public String getServiceArea() {
         return serviceArea;
@@ -70,5 +72,21 @@ public class Plumber extends Employee{
     @Override
     public String toString() {
         return "Plumber{" + "name=" + getName() + ", lastName=" + getLastName() + '}';
+    }
+
+    @Override
+    public void ReportIncident(String incidentDetails) {
+        System.out.println("Plumber reports an incident: " + incidentDetails);
+    }
+
+    @Override
+    public void ExecuteEmergencyProtocol() {
+        System.out.println("Plumber leaves the construction site and notifies the construction engineer of the incident.");
+    }
+
+    @Override
+    public String AssessDamage() {
+        System.out.println("Plumber is assessing damage.");
+        return "Damage assessment completed.";
     }
 }

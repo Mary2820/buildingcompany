@@ -13,6 +13,8 @@ public class Window {
         this.glassType = glassType;
     }
 
+    public Window() {}
+
     public double getLength() {
         return length;
     }

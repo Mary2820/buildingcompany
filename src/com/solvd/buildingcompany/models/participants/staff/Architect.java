@@ -5,20 +5,21 @@ import com.solvd.buildingcompany.models.Blueprint;
 import com.solvd.buildingcompany.models.building.Building;
 
 public class Architect extends Employee{
-    private boolean isAvailable;
+    private int salary;
 
-    public Architect(String name, String lastName, int yearsOfExperience, boolean isAvailable, boolean isManagement) {
+    public Architect(String name, String lastName, int yearsOfExperience, int salary) {
         super(name, lastName, yearsOfExperience);
-        this.isAvailable = isAvailable;
-        this.isManagement = isManagement;
+        this.salary = salary;
     }
 
-    public boolean isAvailable() {
-        return isAvailable;
+    public Architect() {super();}
+
+    public int getSalary() {
+        return salary;
     }
 
-    public void setAvailable(boolean available) {
-        isAvailable = available;
+    public void setSalary(int salary) {
+        this.salary = salary;
     }
 
     public Blueprint createBlueprint() {
@@ -50,5 +51,21 @@ public class Architect extends Employee{
     @Override
     public void maintainEquipment() {
         System.out.println("Architect keeps architectural tools and equipment calibrated and ready for use.");
+    }
+
+    @Override
+    public void ReportIncident(String incidentDetails) {
+        System.out.println("Architect reports an incident: " + incidentDetails);
+    }
+
+    @Override
+    public void ExecuteEmergencyProtocol() {
+        System.out.println("Architect tells company about incident and calls 911");
+    }
+
+    @Override
+    public String AssessDamage() {
+        System.out.println("Architect is assessing damage.");
+        return "Damage assessment completed.";
     }
 }
