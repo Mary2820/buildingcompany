@@ -1,5 +1,6 @@
 package com.solvd.buildingcompany.models.participants;
 
+import com.solvd.buildingcompany.exceptions.BlueprintNotApprovedException;
 import com.solvd.buildingcompany.models.Blueprint;
 import com.solvd.buildingcompany.enums.BuildingType;
 import com.solvd.buildingcompany.models.Project;
@@ -47,12 +48,16 @@ public class Customer {
     public Project planProject() {
         System.out.printf("Customer %s %s plans a project.\n", getName(), getLastName());
         return new Project(BuildingType.INDUSTRIAL_BUILDING, 856000,
-                "Warsaw, Pilow Street, 145B");
+                "Warsaw, Pilow Street, 145B", 1800);
     }
 
-    public boolean isBlueprintApproved(Blueprint blueprint) {
+    public boolean isBlueprintApproved(Blueprint blueprint, int expectedAreaSize) throws BlueprintNotApprovedException {
         System.out.println("Customer approves the blueprint.");
-        return blueprint != null;
+        if (blueprint.getActualAreaSize() != expectedAreaSize) {
+            throw new BlueprintNotApprovedException("Blueprint is not approved because the area does not meet " +
+                    "the customer's requirements");
+        }
+        return true;
     }
 
     @Override

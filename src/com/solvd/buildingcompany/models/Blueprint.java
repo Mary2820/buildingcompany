@@ -2,14 +2,14 @@ package com.solvd.buildingcompany.models;
 
 public class Blueprint {
     private int floorCount;
-    private int areaSize;
+    private int actualAreaSize;
     private int roomsCount;
     private int windowsCount;
     private int doorsCount;
 
-    public Blueprint(int floorCount, int areaSize, int roomsCount, int windowsCount, int doorsCount) {
+    public Blueprint(int floorCount, int actualAreaSize, int roomsCount, int windowsCount, int doorsCount) {
         this.floorCount = floorCount;
-        this.areaSize = areaSize;
+        this.actualAreaSize = actualAreaSize;
         this.roomsCount = roomsCount;
         this.windowsCount = windowsCount;
         this.doorsCount = doorsCount;
@@ -25,12 +25,13 @@ public class Blueprint {
         this.floorCount = floorCount;
     }
 
-    public int getAreaSize() {
-        return areaSize;
+    public int getActualAreaSize() {
+        return actualAreaSize;
     }
 
-    public void setAreaSize(int areaSize) {
-        this.areaSize = areaSize;
+    public void setActualAreaSize(int actualAreaSize) {
+        System.out.println("Actual area size is added.");
+        this.actualAreaSize = actualAreaSize;
     }
 
     public int getRoomsCount() {

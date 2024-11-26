@@ -24,7 +24,7 @@ public class Architect extends Employee{
 
     public Blueprint createBlueprint() {
         System.out.printf("Architect %s %s creates a blueprint.\n", getName(), getLastName());
-        return new Blueprint(4, 1800, 100, 250,
+        return new Blueprint(4, 1700, 100, 250,
                 120);
     }
 

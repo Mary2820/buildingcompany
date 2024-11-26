@@ -1,6 +1,9 @@
 package com.solvd.buildingcompany;
 
 import com.solvd.buildingcompany.enums.BuildingStage;
+import com.solvd.buildingcompany.exceptions.BlueprintNotApprovedException;
+import com.solvd.buildingcompany.exceptions.CustomerNotFoundException;
+import com.solvd.buildingcompany.exceptions.IncompleteBuildingException;
 import com.solvd.buildingcompany.models.Blueprint;
 import com.solvd.buildingcompany.models.Company;
 import com.solvd.buildingcompany.models.Project;
@@ -19,7 +22,14 @@ public class Main {
                 new HashMap<>());
 
         company.addCustomer(customer);
-        company.getCustomerInfo("CL1");
+
+        try {
+            company.getCustomerInfo("CL1");
+        } catch (CustomerNotFoundException e) {
+            System.out.println(e.getMessage());
+            company.addCustomer(customer);
+        }
+
         company.addProject(project);
 
         Architect architect = new Architect("Michael", "Thompson", 5, 10500);
@@ -43,10 +53,15 @@ public class Main {
         company.assignTeamToProject(constructionTeam);
 
         Blueprint blueprint = architect.createBlueprint();
-        assert !customer.isBlueprintApproved(blueprint) : "Expected true but received false: customer isn't approved" +
-                " a blueprint ";
+
+        try {
+            customer.isBlueprintApproved(blueprint, project.getExpectedAreaSize());
+        } catch (BlueprintNotApprovedException e) {
+            System.out.println(e.getMessage());
+            blueprint.setActualAreaSize(project.getExpectedAreaSize());
+        }
+
         project.setBlueprint(blueprint);
-        assert project.getBlueprint() == null : "Expected true but received false: blueprint wasn't added to the project";
 
         Building building = new Building(project);
 
@@ -55,7 +70,14 @@ public class Main {
         Inspector inspector = new Inspector("Oliver", "Blanko", 11, 555489);
         inspector.inspectBuilding(building);
 
-        assert !building.isBuilt() : "Expected true but received false: the construction of the building is not finished";
+        try {
+            if (!building.isBuilt()) {
+               throw new IncompleteBuildingException("Building isn't finished");
+            }
+        } catch (IncompleteBuildingException e) {
+            System.out.println(e.getMessage());
+            constructionEngineer.assignEmployeesTasks(constructionTeam, building);
+        }
 
         constructionEngineer.completeProject(project);
         company.removeProject(project);

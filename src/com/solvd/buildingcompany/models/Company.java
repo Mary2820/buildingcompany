@@ -1,5 +1,6 @@
 package com.solvd.buildingcompany.models;
 
+import com.solvd.buildingcompany.exceptions.CustomerNotFoundException;
 import com.solvd.buildingcompany.interfaces.IHandleCustomer;
 import com.solvd.buildingcompany.models.participants.Customer;
 import com.solvd.buildingcompany.models.participants.staff.Employee;
@@ -94,10 +95,11 @@ public class Company implements IHandleCustomer {
     }
 
     @Override
-    public String getCustomerInfo(String customerId) {
-        Customer customer = customers.get(customerId);
-        System.out.println(customer.toString());
-        return customer.toString();
+    public String getCustomerInfo(String customerId) throws CustomerNotFoundException {
+        if (!customers.containsKey(customerId)) {
+            throw new CustomerNotFoundException("Customer with ID " + customerId + " not found.");
+        }
+        return customers.get(customerId).toString();
     }
 
     @Override

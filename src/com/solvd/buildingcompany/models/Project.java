@@ -10,15 +10,18 @@ public class Project implements IManageSchedule {
     private boolean isCompleted;
     private double budget;
     private String address;
+    private int expectedAreaSize;
     private BuildingType buildingType;
     private Blueprint blueprint;
     private Employee[] team;
     private LocalDate deadlineDate;
 
-    public Project(BuildingType buildingType, double budget, String address) {
+
+    public Project(BuildingType buildingType, double budget, String address, int expectedAreaSize) {
         this.buildingType = buildingType;
         this.budget = budget;
         this.address = address;
+        this.expectedAreaSize = expectedAreaSize;
     }
 
     public Project(){}
@@ -45,6 +48,14 @@ public class Project implements IManageSchedule {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public int getExpectedAreaSize() {
+        return expectedAreaSize;
+    }
+
+    public void setExpectedAreaSize(int expectedAreaSize) {
+        this.expectedAreaSize = expectedAreaSize;
     }
 
     public Blueprint getBlueprint() {
