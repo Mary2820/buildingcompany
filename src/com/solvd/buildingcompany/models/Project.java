@@ -68,6 +68,11 @@ public class Project implements IManageSchedule {
     }
 
     public boolean isCompleted() {
+        if (isCompleted) {
+            System.out.println("is completed");
+        } else {
+            System.out.println("in progress");
+        }
         return isCompleted;
     }
 

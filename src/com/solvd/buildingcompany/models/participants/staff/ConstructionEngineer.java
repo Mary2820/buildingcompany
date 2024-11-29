@@ -1,9 +1,14 @@
 package com.solvd.buildingcompany.models.participants.staff;
 
 import com.solvd.buildingcompany.enums.BuildingStage;
+import com.solvd.buildingcompany.exceptions.ReportGenerationException;
 import com.solvd.buildingcompany.interfaces.ITrainEmployee;
 import com.solvd.buildingcompany.models.Project;
 import com.solvd.buildingcompany.models.building.Building;
+import com.solvd.buildingcompany.models.participants.Customer;
+
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class ConstructionEngineer extends Employee implements ITrainEmployee {
     private int salary;
@@ -38,6 +43,15 @@ public class ConstructionEngineer extends Employee implements ITrainEmployee {
     public void work(Building building, BuildingStage buildingStage) {
         System.out.println("Engineer oversees each stage of construction, coordinating with teams to ensure structural" +
                 " integrity and adherence to specifications.");
+    }
+
+    public void generateProjectReport(Project project, Customer customer) throws ReportGenerationException {
+        try (FileWriter writer = new FileWriter("project_report.txt")) {
+            writer.write("Project Report for customer : " + customer.getName() + "\n");
+            writer.write("Status: " + project.isCompleted() + "\n");
+        } catch (IOException e) {
+            throw new ReportGenerationException("Failed to generate project report for: " + customer.getName(), e);
+        }
     }
 
     @Override
