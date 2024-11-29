@@ -16,7 +16,7 @@ public class MyLinkedList<T> {
         }
     }
 
-    public void addLastElement(T data) {
+    public void add(T data) {
         Node newNode = new Node(data);
         if (first == null) {
             first = last = newNode;
@@ -27,7 +27,7 @@ public class MyLinkedList<T> {
         }
     }
 
-    public boolean removeElement(T data) {
+    public boolean remove(T data) {
         if (first == null) {
             return false;
         }
@@ -62,7 +62,7 @@ public class MyLinkedList<T> {
         return false;
     }
 
-    public T getElement(int index) throws IndexOutOfBoundsException {
+    public T get(int index) throws IndexOutOfBoundsException {
         if (index < 0) {
             throw new IndexOutOfBoundsException("Index cannot be negative");
         }

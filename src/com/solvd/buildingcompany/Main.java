@@ -3,6 +3,8 @@ package com.solvd.buildingcompany;
 import com.solvd.buildingcompany.enums.BuildingStage;
 import com.solvd.buildingcompany.models.participants.staff.*;
 
+import java.util.LinkedList;
+
 public class Main {
     public static void main(String[] args) {
         Architect architect = new Architect("Michael", "Thompson", 5, 10500);
@@ -21,15 +23,17 @@ public class Main {
         DoorInstaller installer = new DoorInstaller("Mike", "Lars",
                 7, new BuildingStage[]{BuildingStage.DOORS, BuildingStage.WINDOWS});
 
-        MyLinkedList<Employee> linkedList = new MyLinkedList();
-        linkedList.addLastElement(architect);
-        linkedList.addLastElement(electrician);
-        linkedList.addLastElement(builder);
+        LinkedList<Employee> linkedList = new LinkedList<>();
+        linkedList.add(architect);
+        linkedList.add(electrician);
+        linkedList.add(builder);
 
-        Employee element = linkedList.getElement(1);
+        Employee element = linkedList.get(1);
+        System.out.println(element.getName());
 
-        linkedList.removeElement(electrician);
-        Employee element2 = linkedList.getElement(1);
+
+        linkedList.remove(electrician);
+        Employee element2 = linkedList.get(1);
         System.out.println(element2.getName());
 
 
