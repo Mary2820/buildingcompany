@@ -4,6 +4,7 @@ import com.solvd.buildingcompany.enums.BuildingStage;
 import com.solvd.buildingcompany.models.Blueprint;
 import com.solvd.buildingcompany.models.building.Building;
 import com.solvd.buildingcompany.models.building.components.*;
+import com.solvd.buildingcompany.utils.MyLinkedList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +58,8 @@ public class DoorInstaller extends Employee{
     }
 
     @Override
-    public void submitReport() {
+    public void addReport(MyLinkedList<String> reports) {
+        reports.add("DoorInstaller completed his work.");
         System.out.println("DoorInstaller checks each installation for airtight seals, insulation, and quality" +
                 " to ensure durability and energy efficiency.");
     }

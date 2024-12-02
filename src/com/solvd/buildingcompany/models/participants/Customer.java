@@ -4,6 +4,7 @@ import com.solvd.buildingcompany.exceptions.BlueprintNotApprovedException;
 import com.solvd.buildingcompany.models.Blueprint;
 import com.solvd.buildingcompany.enums.BuildingType;
 import com.solvd.buildingcompany.models.Project;
+import com.solvd.buildingcompany.utils.MyLinkedList;
 
 import java.util.Objects;
 
@@ -48,7 +49,7 @@ public class Customer {
     public Project planProject() {
         System.out.printf("Customer %s %s plans a project.\n", getName(), getLastName());
         return new Project(BuildingType.INDUSTRIAL_BUILDING, 856000,
-                "Warsaw, Pilow Street, 145B", 1800);
+                "Warsaw, Pilow Street, 145B", 1800, new MyLinkedList<>());
     }
 
     public boolean isBlueprintApproved(Blueprint blueprint, int expectedAreaSize) throws BlueprintNotApprovedException {

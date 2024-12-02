@@ -3,6 +3,7 @@ package com.solvd.buildingcompany.models.participants.staff;
 import com.solvd.buildingcompany.enums.BuildingStage;
 import com.solvd.buildingcompany.models.Blueprint;
 import com.solvd.buildingcompany.models.building.Building;
+import com.solvd.buildingcompany.utils.MyLinkedList;
 
 public class Architect extends Employee{
     private int salary;
@@ -24,7 +25,7 @@ public class Architect extends Employee{
 
     public Blueprint createBlueprint() {
         System.out.printf("Architect %s %s creates a blueprint.\n", getName(), getLastName());
-        return new Blueprint(4, 1700, 100, 250,
+        return new Blueprint(4, 1800, 100, 250,
                 120);
     }
 
@@ -44,7 +45,7 @@ public class Architect extends Employee{
     }
 
     @Override
-    public void submitReport() {
+    public void addReport(MyLinkedList<String> reports) {
         System.out.println("Architect documents construction milestones, design adjustments, and compliance updates..");
     }
 

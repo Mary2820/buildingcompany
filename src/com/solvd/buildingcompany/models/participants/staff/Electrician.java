@@ -3,6 +3,7 @@ package com.solvd.buildingcompany.models.participants.staff;
 import com.solvd.buildingcompany.enums.BuildingStage;
 import com.solvd.buildingcompany.models.building.Building;
 import com.solvd.buildingcompany.models.building.components.ElectricalSystem;
+import com.solvd.buildingcompany.utils.MyLinkedList;
 
 import java.util.Objects;
 
@@ -45,7 +46,8 @@ public class Electrician extends Employee{
     }
 
     @Override
-    public void submitReport() {
+    public void addReport(MyLinkedList<String> reports) {
+        reports.add("Electrician completed his work.");
         System.out.println("Electician conducts tests to ensure all connections are secure, circuits are functioning" +
                 " correctly, and there are no hazards. ");
     }

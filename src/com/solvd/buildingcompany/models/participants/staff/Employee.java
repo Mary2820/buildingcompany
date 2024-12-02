@@ -3,6 +3,7 @@ package com.solvd.buildingcompany.models.participants.staff;
 import com.solvd.buildingcompany.enums.BuildingStage;
 import com.solvd.buildingcompany.interfaces.IHandleEmergency;
 import com.solvd.buildingcompany.models.building.Building;
+import com.solvd.buildingcompany.utils.MyLinkedList;
 
 public abstract class Employee implements IHandleEmergency {
     private int yearsOfExperience;
@@ -56,8 +57,7 @@ public abstract class Employee implements IHandleEmergency {
 
     public abstract void work(Building building, BuildingStage buildingStage);
 
-    public abstract void submitReport();
+    public abstract void addReport(MyLinkedList<String> reports);
 
     public abstract void maintainEquipment();
-
 }

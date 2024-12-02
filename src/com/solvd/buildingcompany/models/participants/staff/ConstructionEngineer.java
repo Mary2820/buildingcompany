@@ -6,6 +6,7 @@ import com.solvd.buildingcompany.interfaces.ITrainEmployee;
 import com.solvd.buildingcompany.models.Project;
 import com.solvd.buildingcompany.models.building.Building;
 import com.solvd.buildingcompany.models.participants.Customer;
+import com.solvd.buildingcompany.utils.MyLinkedList;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -47,15 +48,18 @@ public class ConstructionEngineer extends Employee implements ITrainEmployee {
 
     public void generateProjectReport(Project project, Customer customer) throws ReportGenerationException {
         try (FileWriter writer = new FileWriter("project_report.txt")) {
-            writer.write("Project Report for customer : " + customer.getName() + "\n");
-            writer.write("Status: " + project.isCompleted() + "\n");
+            writer.write("Project Report for customer : " + customer.getName() + " " + customer.getLastName() + "\n");
+            writer.write("Is building completed: " + project.isCompleted() + "\n");
+
+            MyLinkedList<String> reports = project.getReports();
+            writer.write(reports.toString());
         } catch (IOException e) {
             throw new ReportGenerationException("Failed to generate project report for: " + customer.getName(), e);
         }
     }
 
     @Override
-    public void submitReport() {
+    public void addReport(MyLinkedList<String> reports) {
         System.out.println("Engineer documents completed stages, quality assessments, and any adjustments for" +
                 " regulatory compliance.");
     }
@@ -82,6 +86,7 @@ public class ConstructionEngineer extends Employee implements ITrainEmployee {
             System.out.printf("Construction engineer %s %s is assigning %s %s to do a task.\n", getName(), getLastName(),
                     employee.getName(), employee.getLastName());
             employee.work(building, stage);
+            employee.addReport(building.getProject().getReports());
         }
     }
 

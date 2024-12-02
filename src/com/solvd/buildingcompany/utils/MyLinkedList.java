@@ -81,4 +81,24 @@ public class MyLinkedList<T> {
         }
         throw new IndexOutOfBoundsException("Index out of bounds");
     }
+
+    public String toString() {
+        if (first == null) {
+            return "[]";
+        }
+
+        StringBuilder result = new StringBuilder("[\n");
+        Node current = first;
+
+        while (current != null) {
+            result.append(current.data);
+            if (current.next != null) {
+                result.append(",\n ");
+            }
+            current = current.next;
+        }
+
+        result.append("\n]");
+        return result.toString();
+    }
 }

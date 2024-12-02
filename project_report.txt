@@ -1,2 +1,12 @@
-Project Report for customer : Emma
-Status: false
+Project Report for customer : Emma Sullivan
+Is building completed: true
+[
+Builder completed his work.,
+ Builder completed his work.,
+ Builder completed his work.,
+ DoorInstaller completed his work.,
+ DoorInstaller completed his work.,
+ Plumber completed his work.,
+ Electrician completed his work.,
+ GasTechnician completed his work.
+]

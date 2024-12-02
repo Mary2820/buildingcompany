@@ -3,6 +3,7 @@ package com.solvd.buildingcompany.models.participants.staff;
 import com.solvd.buildingcompany.enums.BuildingStage;
 import com.solvd.buildingcompany.models.building.Building;
 import com.solvd.buildingcompany.models.building.components.PlumbingSystem;
+import com.solvd.buildingcompany.utils.MyLinkedList;
 
 import java.util.Objects;
 
@@ -44,7 +45,8 @@ public class Plumber extends Employee{
     }
 
     @Override
-    public void submitReport() {
+    public void addReport(MyLinkedList<String> reports) {
+        reports.add("Plumber completed his work.");
         System.out.println("Plumber checks for leaks, ensures proper water flow, and verifies that all connections" +
                 " are secure and functioning correctly.");
     }

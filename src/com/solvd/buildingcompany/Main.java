@@ -68,12 +68,6 @@ public class Main {
 
         constructionEngineer.assignEmployeesTasks(constructionTeam, building);
 
-        try {
-            constructionEngineer.generateProjectReport(project, customer);
-        } catch (ReportGenerationException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-
         Inspector inspector = new Inspector("Oliver", "Blanko", 11, 555489);
 
         try {
@@ -84,6 +78,13 @@ public class Main {
         }
 
         constructionEngineer.completeProject(project);
+
+        try {
+            constructionEngineer.generateProjectReport(project, customer);
+        } catch (ReportGenerationException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
         company.removeProject(project);
 
         try {

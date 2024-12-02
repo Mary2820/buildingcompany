@@ -3,6 +3,7 @@ package com.solvd.buildingcompany.models;
 import com.solvd.buildingcompany.enums.BuildingType;
 import com.solvd.buildingcompany.interfaces.IManageSchedule;
 import com.solvd.buildingcompany.models.participants.staff.Employee;
+import com.solvd.buildingcompany.utils.MyLinkedList;
 
 import java.time.LocalDate;
 
@@ -15,13 +16,15 @@ public class Project implements IManageSchedule {
     private Blueprint blueprint;
     private Employee[] team;
     private LocalDate deadlineDate;
+    private MyLinkedList<String> reports;
 
 
-    public Project(BuildingType buildingType, double budget, String address, int expectedAreaSize) {
+    public Project(BuildingType buildingType, double budget, String address, int expectedAreaSize, MyLinkedList<String> reports) {
         this.buildingType = buildingType;
         this.budget = budget;
         this.address = address;
         this.expectedAreaSize = expectedAreaSize;
+        this.reports = reports;
     }
 
     public Project(){}
@@ -97,5 +100,13 @@ public class Project implements IManageSchedule {
     @Override
     public LocalDate getDeadlineDate() {
         return deadlineDate;
+    }
+
+    public MyLinkedList<String> getReports() {
+        return reports;
+    }
+
+    public void setReports(MyLinkedList<String> reports) {
+        this.reports = reports;
     }
 }

@@ -5,6 +5,7 @@ import com.solvd.buildingcompany.models.building.Building;
 import com.solvd.buildingcompany.models.building.components.Foundation;
 import com.solvd.buildingcompany.models.building.components.Roof;
 import com.solvd.buildingcompany.models.building.components.Wall;
+import com.solvd.buildingcompany.utils.MyLinkedList;
 
 import java.util.Arrays;
 
@@ -62,7 +63,8 @@ public class Builder extends Employee{
     }
 
     @Override
-    public void submitReport() {
+    public void addReport(MyLinkedList<String> reports) {
+        reports.add("Builder completed his work.");
         System.out.println("Builder ensures each stage meets building codes and quality standards before moving " +
                 "to the next phase.");
     }
