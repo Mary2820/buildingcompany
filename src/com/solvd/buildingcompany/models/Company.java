@@ -1,6 +1,7 @@
 package com.solvd.buildingcompany.models;
 
 import com.solvd.buildingcompany.exceptions.CustomerNotFoundException;
+import com.solvd.buildingcompany.exceptions.ProjectNotFoundException;
 import com.solvd.buildingcompany.interfaces.IHandleCustomer;
 import com.solvd.buildingcompany.models.participants.Customer;
 import com.solvd.buildingcompany.models.participants.staff.Employee;
@@ -56,7 +57,11 @@ public class Company implements IHandleCustomer {
         this.customers = customers;
     }
 
-    public void addProject(Project project) {
+    public void addProject(Project project) throws ProjectNotFoundException {
+        if (project == null) {
+            throw new ProjectNotFoundException("Project is not found.");
+        }
+
         System.out.printf("Company %s collects information about the project.\n", getName());
         projects.add(project);
     }
@@ -76,7 +81,10 @@ public class Company implements IHandleCustomer {
     }
 
     @Override
-    public void addCustomer(Customer customer) {
+    public void addCustomer(Customer customer) throws CustomerNotFoundException {
+        if (customer == null) {
+            throw new CustomerNotFoundException("Customer is not found.");
+        }
         System.out.printf("Customer %s %s orders a project.\n", customer.getName(), customer.getLastName());
 
         String customerId = "CL" + (customers.size() + 1);
@@ -85,12 +93,12 @@ public class Company implements IHandleCustomer {
     }
 
     @Override
-    public void removeCustomer(String customerId) {
+    public void removeCustomer(String customerId) throws CustomerNotFoundException {
         Customer removedCustomer = customers.remove(customerId);
         if (removedCustomer != null) {
             System.out.println("Customer removed: " + customerId);
         } else {
-            System.out.println("Customer not found: " + customerId);
+            throw new CustomerNotFoundException("Customer is not found.");
         }
     }
 

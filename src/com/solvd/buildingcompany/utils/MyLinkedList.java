@@ -1,13 +1,13 @@
-package com.solvd.buildingcompany;
+package com.solvd.buildingcompany.utils;
 
 public class MyLinkedList<T> {
     private Node first;
     private Node last;
 
     private class Node {
-        T data;
-        Node next;
-        Node previous;
+        private T data;
+        private Node next;
+        private Node previous;
 
         public Node(T data) {
             this.data = data;
@@ -17,6 +17,10 @@ public class MyLinkedList<T> {
     }
 
     public void add(T data) {
+        if (data == null) {
+            throw new IllegalArgumentException("Data cannot be null");
+        }
+
         Node newNode = new Node(data);
         if (first == null) {
             first = last = newNode;
@@ -45,15 +49,14 @@ public class MyLinkedList<T> {
 
         Node current = first;
 
-        while (current != null) { // Поиск нужного элемента
+        while (current != null) {
             if (current.data.equals(data)) {
+                current.previous.next = current.next;
 
-                if (current.next == null) {
-                    last = current.previous;
-                    last.next = null;
-                } else { // удаление элемента по середине
-                    current.previous.next = current.next;
+                if (current.next != null) {
                     current.next.previous = current.previous;
+                } else {
+                    last = current.previous;
                 }
                 return true;
             }

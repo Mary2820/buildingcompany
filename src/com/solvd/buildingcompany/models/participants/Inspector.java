@@ -1,5 +1,6 @@
 package com.solvd.buildingcompany.models.participants;
 
+import com.solvd.buildingcompany.exceptions.IncompleteBuildingException;
 import com.solvd.buildingcompany.models.building.Building;
 
 import java.util.Arrays;
@@ -52,13 +53,18 @@ public class Inspector {
         this.licenseNumber = licenseNumber;
     }
 
-    public void inspectBuilding(Building building) {
+    public void inspectBuilding(Building building) throws IncompleteBuildingException {
         System.out.printf("Inspector %s %s inspects the building.\n", getName(), getLastName());
         Object[] buildingComponents = {building.getFoundation(), building.getWalls(), building.getRoof(),
                 building.getDoors(), building.getWindows(), building.getElectricalSystem(), building.getGasSystem(),
                 building.getPlumbingSystem()};
 
         boolean isComponentsBuilt = Arrays.stream(buildingComponents).allMatch(Objects::nonNull);
-        building.setIsBuilt(isComponentsBuilt);
+        if (isComponentsBuilt) {
+            building.setIsBuilt(isComponentsBuilt);
+        } else {
+            throw new IncompleteBuildingException("Building is not completed.");
+        }
+
     }
 }
