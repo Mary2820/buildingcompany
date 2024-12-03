@@ -47,7 +47,7 @@ public class ConstructionEngineer extends Employee implements ITrainEmployee {
     }
 
     public void generateProjectReport(Project project, Customer customer) throws ReportGenerationException {
-        try (FileWriter writer = new FileWriter("project_report.txt")) {
+        try (FileWriter writer = new FileWriter("src/main/resources/project_report.txt")) {
             writer.write("Project Report for customer : " + customer.getName() + " " + customer.getLastName() + "\n");
             writer.write("Is building completed: " + project.isCompleted() + "\n");
 
