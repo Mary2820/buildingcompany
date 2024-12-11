@@ -1,27 +1,15 @@
 package com.solvd.buildingcompany.utils;
 
 public class MyLinkedList<T> {
-    private Node first;
-    private Node last;
-
-    private class Node {
-        private T data;
-        private Node next;
-        private Node previous;
-
-        public Node(T data) {
-            this.data = data;
-            this.next = null;
-            this.previous = null;
-        }
-    }
+    private Node<T> first;
+    private Node<T> last;
 
     public void add(T data) {
         if (data == null) {
             throw new IllegalArgumentException("Data cannot be null");
         }
 
-        Node newNode = new Node(data);
+        Node<T> newNode = new Node<>(data);
         if (first == null) {
             first = last = newNode;
         } else {
@@ -47,7 +35,7 @@ public class MyLinkedList<T> {
             return true;
         }
 
-        Node current = first;
+        Node<T> current = first;
 
         while (current != null) {
             if (current.data.equals(data)) {
@@ -70,7 +58,7 @@ public class MyLinkedList<T> {
             throw new IndexOutOfBoundsException("Index cannot be negative");
         }
 
-        Node current = first;
+        Node<T> current = first;
         int count = 0;
         while (current != null) {
             if (count == index) {
@@ -88,7 +76,7 @@ public class MyLinkedList<T> {
         }
 
         StringBuilder result = new StringBuilder("[\n");
-        Node current = first;
+        Node<T> current = first;
 
         while (current != null) {
             result.append(current.data);
