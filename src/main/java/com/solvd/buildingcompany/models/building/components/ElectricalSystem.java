@@ -1,8 +1,12 @@
 package com.solvd.buildingcompany.models.building.components;
 
 import com.solvd.buildingcompany.interfaces.IPerformMaintenance;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ElectricalSystem implements IPerformMaintenance {
+    private static final Logger logger = LogManager.getLogger(ElectricalSystem.class.getName());
+
     private String maxVoltage;
     private int outletsCount;
     private boolean isMaintenanceRequired;
@@ -37,10 +41,10 @@ public class ElectricalSystem implements IPerformMaintenance {
     @Override
     public void performMaintenance() {
         if (isMaintenanceRequired) {
-            System.out.println("Performing maintenance on the electrical system.");
+            logger.info("Performing maintenance on the electrical system.");
             isMaintenanceRequired = false;
         } else {
-            System.out.println("No maintenance required.");
+            logger.info("No maintenance required.");
         }
     }
 

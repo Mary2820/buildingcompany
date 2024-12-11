@@ -1,12 +1,16 @@
 package com.solvd.buildingcompany.models.participants;
 
+import com.solvd.buildingcompany.enums.BuildingStage;
 import com.solvd.buildingcompany.exceptions.IncompleteBuildingException;
 import com.solvd.buildingcompany.models.building.Building;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.util.Arrays;
-import java.util.Objects;
+import java.util.*;
 
 public class Inspector {
+    private static final Logger logger = LogManager.getLogger(Inspector.class.getName());
+
     private String name;
     private String lastName;
     private int yearsOfExperience;
@@ -54,17 +58,27 @@ public class Inspector {
     }
 
     public void inspectBuilding(Building building) throws IncompleteBuildingException {
-        System.out.printf("Inspector %s %s inspects the building.\n", getName(), getLastName());
-        Object[] buildingComponents = {building.getFoundation(), building.getWalls(), building.getRoof(),
-                building.getDoors(), building.getWindows(), building.getElectricalSystem(), building.getGasSystem(),
-                building.getPlumbingSystem()};
+        logger.info("Inspector {} {} inspects the building.\n", getName(), getLastName());
 
-        boolean isComponentsBuilt = Arrays.stream(buildingComponents).allMatch(Objects::nonNull);
-        if (isComponentsBuilt) {
-            building.setIsBuilt(isComponentsBuilt);
+        Map<BuildingStage, Object> buildingComponents = new HashMap<>();
+        buildingComponents.put(BuildingStage.FOUNDATION, building.getFoundation());
+        buildingComponents.put(BuildingStage.WALLS, building.getWalls());
+        buildingComponents.put(BuildingStage.ROOF, building.getRoof());
+        buildingComponents.put(BuildingStage.DOORS, building.getDoors());
+        buildingComponents.put(BuildingStage.WINDOWS, building.getWindows());
+        buildingComponents.put(BuildingStage.ELECTRICAL_SYSTEM, building.getElectricalSystem());
+        buildingComponents.put(BuildingStage.GAS_SYSTEM, building.getGasSystem());
+        buildingComponents.put(BuildingStage.PLUMBING_SYSTEM, building.getPlumbingSystem());
+
+        List<BuildingStage> projectStages = building.getProject().getStages();
+        boolean isCompleted = projectStages.stream().allMatch(stage -> buildingComponents.getOrDefault(stage,
+                null) != null);
+
+        if (isCompleted) {
+            building.setIsBuilt(true);
+            logger.info("Building passed the inspection and is marked as completed.");
         } else {
-            throw new IncompleteBuildingException("Building is not completed.");
+            throw new IncompleteBuildingException("Building is not completed. Some required components are missing.");
         }
-
     }
 }

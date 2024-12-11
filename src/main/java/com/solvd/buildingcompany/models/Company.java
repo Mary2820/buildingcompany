@@ -5,11 +5,15 @@ import com.solvd.buildingcompany.exceptions.ProjectNotFoundException;
 import com.solvd.buildingcompany.interfaces.IHandleCustomer;
 import com.solvd.buildingcompany.models.participants.Customer;
 import com.solvd.buildingcompany.models.participants.staff.Employee;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 import java.util.Map;
 
 public class Company implements IHandleCustomer {
+    private static final Logger logger = LogManager.getLogger(Company.class.getName());
+
     private String name;
     private String phoneNumber;
     private List<Project> projects;
@@ -62,7 +66,7 @@ public class Company implements IHandleCustomer {
             throw new ProjectNotFoundException("Project is not found.");
         }
 
-        System.out.printf("Company %s collects information about the project.\n", getName());
+        logger.info("Company {} collects information about the project.\n", getName());
         projects.add(project);
     }
 
@@ -71,13 +75,11 @@ public class Company implements IHandleCustomer {
     }
 
     public void assignTeamToProject(Employee[] team) {
-        System.out.printf("Company %s assigns a team.\n", getName());
-        for (Project project : projects) {
-            if (project.getTeam() == null) {
-                project.setTeam(team);
-                return;
-            }
-        }
+        logger.info("Company {} assigns a team.\n", getName());
+        projects.stream()
+                .filter(project -> project.getTeam() == null)
+                .findFirst()
+                .ifPresent(project -> project.setTeam(team));
     }
 
     @Override
@@ -85,18 +87,18 @@ public class Company implements IHandleCustomer {
         if (customer == null) {
             throw new CustomerNotFoundException("Customer is not found.");
         }
-        System.out.printf("Customer %s %s orders a project.\n", customer.getName(), customer.getLastName());
+        logger.info("Customer {} {} orders a project.\n", customer.getName(), customer.getLastName());
 
         String customerId = "CL" + (customers.size() + 1);
         customers.put(customerId, customer);
-        System.out.printf("Customer %s %s adds to list of company customers.\n", customer.getName(), customer.getLastName());
+        logger.info("Customer {} {} adds to list of company customers.\n", customer.getName(), customer.getLastName());
     }
 
     @Override
     public void removeCustomer(String customerId) throws CustomerNotFoundException {
         Customer removedCustomer = customers.remove(customerId);
         if (removedCustomer != null) {
-            System.out.println("Customer removed: " + customerId);
+            logger.info("Customer removed: {}", customerId);
         } else {
             throw new CustomerNotFoundException("Customer is not found.");
         }
@@ -114,9 +116,9 @@ public class Company implements IHandleCustomer {
     public void sendProgressReport(String customerId) {
         Customer customer = customers.get(customerId);
         if (customer != null) {
-            System.out.println("Progress report sent to: " + customer.getName());
+            logger.info("Progress report sent to: {}", customer.getName());
         } else {
-            System.out.println("Customer not found: " + customerId);
+            logger.info("Customer not found: {}", customerId);
         }
     }
 }

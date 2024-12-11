@@ -1,72 +1,70 @@
 package com.solvd.buildingcompany.models.participants.staff;
 
 import com.solvd.buildingcompany.enums.BuildingStage;
+import com.solvd.buildingcompany.enums.ProficiencyLevel;
 import com.solvd.buildingcompany.models.Blueprint;
 import com.solvd.buildingcompany.models.building.Building;
-import com.solvd.buildingcompany.utils.MyLinkedList;
+import com.solvd.buildingcompany.utils.linkedlist.MyLinkedList;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.List;
 
 public class Architect extends Employee{
-    private int salary;
+    private static final Logger logger = LogManager.getLogger(Architect.class.getName());
 
-    public Architect(String name, String lastName, int yearsOfExperience, int salary) {
-        super(name, lastName, yearsOfExperience);
-        this.salary = salary;
+    private List<String> awards;
+
+    public Architect(String name, String lastName, int yearsOfExperience, ProficiencyLevel level, double salary) {
+        super(name, lastName, yearsOfExperience, level, salary);
     }
 
     public Architect() {super();}
 
-    public int getSalary() {
-        return salary;
-    }
-
-    public void setSalary(int salary) {
-        this.salary = salary;
-    }
-
     public Blueprint createBlueprint() {
-        System.out.printf("Architect %s %s creates a blueprint.\n", getName(), getLastName());
+        logger.info("Architect {} {} creates a blueprint.\n", getName(), getLastName());
         return new Blueprint(4, 1800, 100, 250,
                 120);
     }
 
     @Override
     public void createPlan() {
-        System.out.println("Architect outlines the design stages, materials, and technical requirements..");
+        logger.info("Architect outlines the design stages, materials, and technical requirements..");
     }
 
     @Override
     public void prepareToWork() {
-        System.out.println("Architect assembles blueprints, permits, and resources needed for the build");
+        logger.info("Architect assembles blueprints, permits, and resources needed for the build");
     }
 
     @Override
     public void work(Building building, BuildingStage buildingStage) {
-        System.out.println("Architect ensures each phase aligns with architectural design and standards.");
+        logger.info("Architect ensures each phase aligns with architectural design and standards.");
     }
 
     @Override
     public void addReport(MyLinkedList<String> reports) {
-        System.out.println("Architect documents construction milestones, design adjustments, and compliance updates..");
+        logger.info("Architect documents construction milestones, design adjustments, and compliance updates..");
     }
 
     @Override
     public void maintainEquipment() {
-        System.out.println("Architect keeps architectural tools and equipment calibrated and ready for use.");
+        logger.info("Architect keeps architectural tools and equipment calibrated and ready for use.");
     }
 
     @Override
     public void ReportIncident(String incidentDetails) {
-        System.out.println("Architect reports an incident: " + incidentDetails);
+        logger.info("Architect reports an incident: {}", incidentDetails);
     }
 
     @Override
     public void ExecuteEmergencyProtocol() {
-        System.out.println("Architect tells company about incident and calls 911");
+        logger.info("Architect tells company about incident and calls 911");
     }
 
     @Override
     public String AssessDamage() {
-        System.out.println("Architect is assessing damage.");
+        logger.info("Architect is assessing damage.");
         return "Damage assessment completed.";
     }
 }

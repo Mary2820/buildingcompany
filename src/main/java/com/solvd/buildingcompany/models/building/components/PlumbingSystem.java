@@ -1,8 +1,12 @@
 package com.solvd.buildingcompany.models.building.components;
 
 import com.solvd.buildingcompany.interfaces.IPerformMaintenance;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class PlumbingSystem implements IPerformMaintenance {
+    private static final Logger logger = LogManager.getLogger(PlumbingSystem.class.getName());
+
     private String waterSupplyType;
     private String sewageType;
     private boolean isMaintenanceRequired;
@@ -37,10 +41,10 @@ public class PlumbingSystem implements IPerformMaintenance {
     @Override
     public void performMaintenance() {
         if (isMaintenanceRequired) {
-            System.out.println("Performing maintenance on the plumbing system.");
+            logger.info("Performing maintenance on the plumbing system.");
             isMaintenanceRequired = false;
         } else {
-            System.out.println("No maintenance required.");
+            logger.info("No maintenance required.");
         }
     }
 

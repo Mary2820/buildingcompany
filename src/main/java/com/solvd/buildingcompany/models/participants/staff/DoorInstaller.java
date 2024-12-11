@@ -1,21 +1,28 @@
 package com.solvd.buildingcompany.models.participants.staff;
 
 import com.solvd.buildingcompany.enums.BuildingStage;
+import com.solvd.buildingcompany.enums.ProficiencyLevel;
 import com.solvd.buildingcompany.models.Blueprint;
 import com.solvd.buildingcompany.models.building.Building;
 import com.solvd.buildingcompany.models.building.components.*;
-import com.solvd.buildingcompany.utils.MyLinkedList;
+import com.solvd.buildingcompany.utils.linkedlist.MyLinkedList;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class DoorInstaller extends Employee{
+    private static final Logger logger = LogManager.getLogger(DoorInstaller.class.getName());
+
     private static final int MASK = 2;
     private boolean hasCompletedTraining;
 
-    public DoorInstaller(String name, String lastName, int yearsOfExperience, BuildingStage[] responsibilities) {
-        super(name, lastName, yearsOfExperience);
+    public DoorInstaller(String name, String lastName, int yearsOfExperience, BuildingStage[] responsibilities,
+                         ProficiencyLevel proficiencyLevel, double salary) {
+        super(name, lastName, yearsOfExperience, proficiencyLevel, salary);
 
         setResponsibilities(responsibilities);
     }
@@ -32,13 +39,13 @@ public class DoorInstaller extends Employee{
 
     @Override
     public void createPlan() {
-        System.out.println("DoorInstaller studies blueprints and measurements to understand the specifications for" +
+        logger.info("DoorInstaller studies blueprints and measurements to understand the specifications for" +
                 " each door and window. ");
     }
 
     @Override
     public void prepareToWork() {
-        System.out.println("DoorInstaller ensures openings are level, clean, and ready for fitting, making necessary" +
+        logger.info("DoorInstaller ensures openings are level, clean, and ready for fitting, making necessary" +
                 " adjustments for proper alignment.");
     }
 
@@ -47,12 +54,14 @@ public class DoorInstaller extends Employee{
         Blueprint blueprint = building.getProject().getBlueprint();
         switch (buildingStage) {
             case WINDOWS:
-                System.out.printf("Installer %s %s installs windows.\n", getName(), getLastName());
+                logger.info("Installer {} {} installs windows.\n", getName(), getLastName());
                 installWindows(building, blueprint.getWindowsCount());
+                building.getProject().increaseMaterialExpenses(8000);
                 break;
             case DOORS:
-                System.out.printf("Installer %s %s installs doors.\n", getName(), getLastName());
+                logger.info("Installer {} {} installs doors.\n", getName(), getLastName());
                 installDoors(building, blueprint.getDoorsCount());
+                building.getProject().increaseMaterialExpenses(8000);
                 break;
         }
     }
@@ -60,13 +69,13 @@ public class DoorInstaller extends Employee{
     @Override
     public void addReport(MyLinkedList<String> reports) {
         reports.add("DoorInstaller completed his work.");
-        System.out.println("DoorInstaller checks each installation for airtight seals, insulation, and quality" +
+        logger.info("DoorInstaller checks each installation for airtight seals, insulation, and quality" +
                 " to ensure durability and energy efficiency.");
     }
 
     @Override
     public void maintainEquipment() {
-        System.out.println("DoorInstaller Keeps installation tools in top condition, performing regular checks and" +
+        logger.info("DoorInstaller Keeps installation tools in top condition, performing regular checks and" +
                 " maintenance for accuracy and safety.");
     }
 
@@ -90,36 +99,33 @@ public class DoorInstaller extends Employee{
     }
 
     private void installWindows(Building building, int windowsCount) {
-        List<Window> windows = new ArrayList<>();
-        for (int i = 0; i <= windowsCount; i++) {
-            windows.add(new Window(1.5, 1.2, 0.05, "double-pane glass"));
-        }
+        List<Window> windows = IntStream.rangeClosed(0, windowsCount)
+                .mapToObj(i -> new Window(1.5, 1.2, 0.05, "double-pane glass"))
+                .collect(Collectors.toList());
         building.setWindows(windows);
     }
 
     private void installDoors(Building building, int doorsCount) {
-        List<Door> doors = new ArrayList<>();
-        for (int i = 0; i <= doorsCount; i++) {
-            doors.add(new Door(0.9, 2, true));
-        }
+        List<Door> doors = IntStream.rangeClosed(0, doorsCount)
+                .mapToObj(i -> new Door(0.9, 2, true))
+                .collect(Collectors.toList());
         building.setDoors(doors);
     }
 
     @Override
     public void ReportIncident(String incidentDetails) {
-        System.out.println("Door installer reports an incident: " + incidentDetails);
+        logger.info("Door installer reports an incident: {}", incidentDetails);
     }
 
     @Override
     public void ExecuteEmergencyProtocol() {
-        System.out.println("Door installer leaves the construction site and notifies the construction engineer of" +
+        logger.info("Door installer leaves the construction site and notifies the construction engineer of" +
                 " the incident.");
-
     }
 
     @Override
     public String AssessDamage() {
-        System.out.println("Door installer is assessing damage.");
+        logger.info("Door installer is assessing damage.");
         return "Damage assessment completed.";
     }
 }

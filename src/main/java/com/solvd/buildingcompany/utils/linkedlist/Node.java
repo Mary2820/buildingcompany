@@ -1,4 +1,4 @@
-package com.solvd.buildingcompany.utils;
+package com.solvd.buildingcompany.utils.linkedlist;
 
 public class Node<T> {
     protected T data;

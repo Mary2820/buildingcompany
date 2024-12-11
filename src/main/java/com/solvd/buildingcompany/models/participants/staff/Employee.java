@@ -1,23 +1,30 @@
 package com.solvd.buildingcompany.models.participants.staff;
 
 import com.solvd.buildingcompany.enums.BuildingStage;
+import com.solvd.buildingcompany.enums.ProficiencyLevel;
 import com.solvd.buildingcompany.interfaces.IHandleEmergency;
 import com.solvd.buildingcompany.models.building.Building;
-import com.solvd.buildingcompany.utils.MyLinkedList;
+import com.solvd.buildingcompany.utils.linkedlist.MyLinkedList;
 
 public abstract class Employee implements IHandleEmergency {
     private int yearsOfExperience;
     private String name;
     private String lastName;
     private BuildingStage[] responsibilities;
+    private ProficiencyLevel proficiencyLevel;
+    private double salary;
 
-    public Employee(String name, String lastName, int yearsOfExperience) {
+
+    public Employee(String name, String lastName, int yearsOfExperience, ProficiencyLevel level, double salary) {
         this.name = name;
         this.lastName = lastName;
         this.yearsOfExperience = yearsOfExperience;
+        this.proficiencyLevel = level;
+        this.salary = salary;
     }
 
-    public Employee() {}
+    public Employee() {
+    }
 
     public String getName() {
         return name;
@@ -49,6 +56,22 @@ public abstract class Employee implements IHandleEmergency {
 
     public void setResponsibilities(BuildingStage[] responsibilities) {
         this.responsibilities = responsibilities;
+    }
+
+    public ProficiencyLevel getProficiencyLevel() {
+        return proficiencyLevel;
+    }
+
+    public void setProficiencyLevel(ProficiencyLevel proficiencyLevel) {
+        this.proficiencyLevel = proficiencyLevel;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
     }
 
     public abstract void createPlan();

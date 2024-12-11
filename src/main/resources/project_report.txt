@@ -1,12 +1,12 @@
 Project Report for customer : Emma Sullivan
 Is building completed: true
+Project time: 155 days
+Is a budget not exceeded true
 [
 Builder completed his work.,
  Builder completed his work.,
  Builder completed his work.,
  DoorInstaller completed his work.,
  DoorInstaller completed his work.,
- Plumber completed his work.,
- Electrician completed his work.,
- GasTechnician completed his work.
+ Electrician completed his work.
 ]

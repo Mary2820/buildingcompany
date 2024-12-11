@@ -1,6 +1,10 @@
 package com.solvd.buildingcompany.models;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Blueprint {
+    private static final Logger logger = LogManager.getLogger(Blueprint.class.getName());
     private int floorCount;
     private int actualAreaSize;
     private int roomsCount;
@@ -30,7 +34,7 @@ public class Blueprint {
     }
 
     public void setActualAreaSize(int actualAreaSize) {
-        System.out.println("Actual area size is added.");
+        logger.info("Actual area size is added.");
         this.actualAreaSize = actualAreaSize;
     }
 

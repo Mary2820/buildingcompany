@@ -1,14 +1,21 @@
 package com.solvd.buildingcompany.models.participants;
 
+import com.solvd.buildingcompany.enums.BuildingStage;
 import com.solvd.buildingcompany.exceptions.BlueprintNotApprovedException;
 import com.solvd.buildingcompany.models.Blueprint;
 import com.solvd.buildingcompany.enums.BuildingType;
+import com.solvd.buildingcompany.models.Budget;
 import com.solvd.buildingcompany.models.Project;
-import com.solvd.buildingcompany.utils.MyLinkedList;
+import com.solvd.buildingcompany.utils.linkedlist.MyLinkedList;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Customer {
+    private static final Logger logger = LogManager.getLogger(Customer.class.getName());
+
     private static final int MASK = 6;
     private String name;
     private String lastName;
@@ -20,7 +27,8 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
-    public Customer() {}
+    public Customer() {
+    }
 
     public String getName() {
         return name;
@@ -47,13 +55,23 @@ public class Customer {
     }
 
     public Project planProject() {
-        System.out.printf("Customer %s %s plans a project.\n", getName(), getLastName());
-        return new Project(BuildingType.INDUSTRIAL_BUILDING, 856000,
-                "Warsaw, Pilow Street, 145B", 1800, new MyLinkedList<>());
+        logger.info("Customer {} {} plans a project.\n", getName(), getLastName());
+
+        ArrayList<BuildingStage> stages = new ArrayList<>();
+        stages.add(BuildingStage.FOUNDATION);
+        stages.add(BuildingStage.WALLS);
+        stages.add(BuildingStage.ROOF);
+        stages.add(BuildingStage.WINDOWS);
+        stages.add(BuildingStage.DOORS);
+        stages.add(BuildingStage.ELECTRICAL_SYSTEM);
+
+        return new Project(BuildingType.INDUSTRIAL_BUILDING, new Budget(85000),
+                "Warsaw, Pilow Street, 145B", 1800, new MyLinkedList<>(),
+                stages);
     }
 
     public boolean isBlueprintApproved(Blueprint blueprint, int expectedAreaSize) throws BlueprintNotApprovedException {
-        System.out.println("Customer approves the blueprint.");
+        logger.info("Customer approves the blueprint.");
         if (blueprint.getActualAreaSize() != expectedAreaSize) {
             throw new BlueprintNotApprovedException("Blueprint is not approved because the area does not meet " +
                     "the customer's requirements");
