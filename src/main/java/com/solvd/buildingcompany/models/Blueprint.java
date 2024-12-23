@@ -10,13 +10,15 @@ public class Blueprint {
     private int roomsCount;
     private int windowsCount;
     private int doorsCount;
+    private int outletsCount;
 
-    public Blueprint(int floorCount, int actualAreaSize, int roomsCount, int windowsCount, int doorsCount) {
+    public Blueprint(int floorCount, int actualAreaSize, int roomsCount, int windowsCount, int doorsCount, int outletsCount) {
         this.floorCount = floorCount;
         this.actualAreaSize = actualAreaSize;
         this.roomsCount = roomsCount;
         this.windowsCount = windowsCount;
         this.doorsCount = doorsCount;
+        this.outletsCount = outletsCount;
     }
 
     public Blueprint() {}
@@ -60,5 +62,13 @@ public class Blueprint {
 
     public void setDoorsCount(int doorsCount) {
         this.doorsCount = doorsCount;
+    }
+
+    public int getOutletsCount() {
+        return outletsCount;
+    }
+
+    public void setOutletsCount(int outletsCount) {
+        this.outletsCount = outletsCount;
     }
 }

@@ -1,5 +1,7 @@
 package com.solvd.buildingcompany.models.participants.staff;
 
+import com.solvd.buildingcompany.demos.multithreading.DoorPainter;
+import com.solvd.buildingcompany.demos.multithreading.WindowPainter;
 import com.solvd.buildingcompany.enums.BuildingStage;
 import com.solvd.buildingcompany.enums.ProficiencyLevel;
 import com.solvd.buildingcompany.models.Blueprint;
@@ -102,6 +104,9 @@ public class DoorInstaller extends Employee{
         List<Window> windows = IntStream.rangeClosed(0, windowsCount)
                 .mapToObj(i -> new Window(1.5, 1.2, 0.05, "double-pane glass"))
                 .collect(Collectors.toList());
+
+        WindowPainter windowPainter = new WindowPainter();
+        windowPainter.paintWindows(windows);
         building.setWindows(windows);
     }
 
@@ -109,6 +114,10 @@ public class DoorInstaller extends Employee{
         List<Door> doors = IntStream.rangeClosed(0, doorsCount)
                 .mapToObj(i -> new Door(0.9, 2, true))
                 .collect(Collectors.toList());
+
+        DoorPainter doorPainter = new DoorPainter();
+        doorPainter.paintDoors(doors);
+
         building.setDoors(doors);
     }
 
@@ -127,5 +136,10 @@ public class DoorInstaller extends Employee{
     public String AssessDamage() {
         logger.info("Door installer is assessing damage.");
         return "Damage assessment completed.";
+    }
+
+    public void paintDoor(Door door) {
+        door.setPainted(true);
+        logger.info("Door is painted");
     }
 }

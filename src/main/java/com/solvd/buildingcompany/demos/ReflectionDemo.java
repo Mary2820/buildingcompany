@@ -32,7 +32,7 @@ public class ReflectionDemo {
 
             Method isBlueprintApproved = customerClass.getMethod("isBlueprintApproved", Blueprint.class, int.class);
             isBlueprintApproved.invoke(customer, new Blueprint(4, 1500, 120, 250,
-                    130), 1500);
+                    130, 300), 1500);
 
             Class<?> companyClass = Class.forName("com.solvd.buildingcompany.models.Company");
             Constructor<?> companyConstructor = companyClass.getConstructor();

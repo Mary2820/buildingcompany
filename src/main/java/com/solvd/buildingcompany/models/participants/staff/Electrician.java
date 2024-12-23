@@ -1,13 +1,17 @@
 package com.solvd.buildingcompany.models.participants.staff;
 
+import com.solvd.buildingcompany.demos.multithreading.OutletsInstaller;
 import com.solvd.buildingcompany.enums.BuildingStage;
 import com.solvd.buildingcompany.enums.ProficiencyLevel;
 import com.solvd.buildingcompany.models.building.Building;
 import com.solvd.buildingcompany.models.building.components.ElectricalSystem;
+import com.solvd.buildingcompany.models.building.components.Outlet;
 import com.solvd.buildingcompany.utils.linkedlist.MyLinkedList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Electrician extends Employee{
@@ -48,7 +52,20 @@ public class Electrician extends Employee{
     @Override
     public void work(Building building, BuildingStage buildingStage) {
         logger.info("Electician {} {} installs the electrical system.\n", getName(), getLastName());
-        building.setElectricalSystem(new ElectricalSystem("220V", 500));
+
+        List<Outlet> outlets = new ArrayList<>();
+
+        int outletsCount = building.getProject().getBlueprint().getOutletsCount();
+
+        for (int i = 0; i < outletsCount; i++) {
+            outlets.add(new Outlet());
+        }
+
+        building.setElectricalSystem(new ElectricalSystem("220V", outlets));
+
+        OutletsInstaller outletsInstaller = new OutletsInstaller();
+        ElectricalSystem electricalSystem = building.getElectricalSystem();
+        outletsInstaller.install(electricalSystem.getOutlets());
 
         building.getProject().increaseMaterialExpenses(15000);
     }

@@ -4,6 +4,7 @@ public class Door {
     private double width;
     private double height;
     private boolean hasLock;
+    private boolean isPainted;
 
     public Door(double width, double height, boolean hasLock) {
         this.width = width;
@@ -35,5 +36,13 @@ public class Door {
 
     public void setHasLock(boolean hasLock) {
         this.hasLock = hasLock;
+    }
+
+    public boolean isPainted() {
+        return isPainted;
+    }
+
+    public void setPainted(boolean painted) {
+        isPainted = painted;
     }
 }

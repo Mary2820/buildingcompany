@@ -5,6 +5,7 @@ public class Window {
     private double width;
     private double height;
     private String glassType;
+    private boolean IsPainted;
 
     public Window(double length, double width, double height, String glassType) {
         this.length = length;
@@ -45,5 +46,13 @@ public class Window {
 
     public void setGlassType(String glassType) {
         this.glassType = glassType;
+    }
+
+    public boolean isPainted() {
+        return IsPainted;
+    }
+
+    public void setPainted(boolean painted) {
+        IsPainted = painted;
     }
 }

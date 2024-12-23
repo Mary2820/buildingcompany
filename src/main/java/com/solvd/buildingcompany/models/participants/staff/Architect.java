@@ -23,8 +23,8 @@ public class Architect extends Employee{
 
     public Blueprint createBlueprint() {
         logger.info("Architect {} {} creates a blueprint.\n", getName(), getLastName());
-        return new Blueprint(4, 1800, 100, 250,
-                120);
+        return new Blueprint(4, 1800, 100, 15,
+                12, 31);
     }
 
     @Override

@@ -4,16 +4,18 @@ import com.solvd.buildingcompany.interfaces.IPerformMaintenance;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
+
 public class ElectricalSystem implements IPerformMaintenance {
     private static final Logger logger = LogManager.getLogger(ElectricalSystem.class.getName());
 
     private String maxVoltage;
-    private int outletsCount;
+    private List<Outlet> outlets;
     private boolean isMaintenanceRequired;
 
-    public ElectricalSystem(String maxVoltage, int outletsCount) {
+    public ElectricalSystem(String maxVoltage, List<Outlet> outlets) {
         this.maxVoltage = maxVoltage;
-        this.outletsCount = outletsCount;
+        this.outlets = outlets;
     }
 
     public ElectricalSystem() {}
@@ -26,12 +28,12 @@ public class ElectricalSystem implements IPerformMaintenance {
         this.maxVoltage = maxVoltage;
     }
 
-    public int getOutletsCount() {
-        return outletsCount;
+    public List<Outlet> getOutlets() {
+        return outlets;
     }
 
-    public void setOutletsCount(int outletsCount) {
-        this.outletsCount = outletsCount;
+    public void setOutlets(List<Outlet> outlets) {
+        this.outlets = outlets;
     }
 
     public void setMaintenanceRequired(boolean isMaintenanceRequired) {
