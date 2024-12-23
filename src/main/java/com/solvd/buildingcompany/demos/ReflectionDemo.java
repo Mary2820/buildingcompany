@@ -40,15 +40,15 @@ public class ReflectionDemo {
 
             logger.info("Fields of companyClass:");
             Arrays.stream(companyClass.getDeclaredFields())
-                    .forEach(field -> System.out.println(" - " + field.getName() + " (" + field.getType().getName() + ")"));
+                    .forEach(field -> logger.info(" - {} ({})", field.getName(), field.getType().getName()));
 
             logger.info("Methods of companyClass:");
             Arrays.stream(companyClass.getDeclaredMethods())
-                    .forEach(method -> System.out.println(" - " + method.getName()));
+                    .forEach(method -> logger.info(" - {}", method.getName()));
 
             logger.info("Constructors of companyClass:");
             Arrays.stream(companyClass.getConstructors())
-                    .forEach(constructor -> System.out.println(" - " + constructor));
+                    .forEach(constructor -> logger.info(" - {}", constructor));
         } catch (Exception e) {
             logger.error(e);
         }

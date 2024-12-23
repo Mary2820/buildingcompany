@@ -4,7 +4,7 @@ public class MyLinkedList<T> {
     private Node<T> first;
     private Node<T> last;
 
-    public void add(T data) {
+    public void add(T data){
         if (data == null) {
             throw new IllegalArgumentException("Data cannot be null");
         }
@@ -17,6 +17,47 @@ public class MyLinkedList<T> {
             newNode.previous = last;
             last = newNode;
         }
+    }
+
+    public void add(T data, int index) {
+        if (data == null) {
+            throw new IllegalArgumentException("Data cannot be null");
+        }
+
+        if (index < 0) {
+            throw new IndexOutOfBoundsException("Index cannot be negative");
+        }
+
+        Node<T> newNode = new Node<>(data);
+
+        if (index == 0) {
+            if (first == null) {
+                first = last = newNode;
+            } else {
+                newNode.next = first;
+                first.previous = newNode;
+                first = newNode;
+            }
+            return;
+        }
+
+        Node<T> current = first;
+        for (int currentIndex = 0; currentIndex < index - 1 && current != null; currentIndex++) {
+            current = current.next;
+        }
+
+        if (current == null) {
+            throw new IndexOutOfBoundsException("Index out of bounds");
+        }
+
+        newNode.next = current.next;
+        if (current.next != null) {
+            current.next.previous = newNode;
+        } else {
+            last = newNode;
+        }
+        current.next = newNode;
+        newNode.previous = current;
     }
 
     public boolean remove(T data) {
