@@ -1,21 +1,12 @@
 package com.solvd.buildingcompany.demos.multithreading.connectionpool;
 
-import java.sql.Connection;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class ConnectionPoolDemo {
 
     public static void main(String[] args) {
-        List<Connection> mockConnections = Collections.synchronizedList(new ArrayList<>());
-        for (int i = 0; i < 5; i++) {
-            mockConnections.add(new MockConnection());
-        }
-
-        ConnectionPool pool = ConnectionPool.getInstance(mockConnections);
+        ConnectionPool pool = ConnectionPool.getInstance();
 
         Runnable task1 = new ConnectionTask(pool, "Thread 1", 1000);
         Runnable task2 = new ConnectionTask(pool, "Thread 2", 800);
@@ -23,6 +14,9 @@ public class ConnectionPoolDemo {
         Runnable task4 = new ConnectionTask(pool, "Thread 4", 1000);
         Runnable task5 = new ConnectionTask(pool, "Thread 5", 1500);
         Runnable task6 = new ConnectionTask(pool, "Thread 6", 1000);
+        Runnable task7 = new ConnectionTask(pool, "Thread 7", 2000);
+        Runnable task8 = new ConnectionTask(pool, "Thread 8", 1300);
+
 
         ExecutorService executor = Executors.newFixedThreadPool(6);
 
@@ -32,6 +26,8 @@ public class ConnectionPoolDemo {
         executor.execute(task4);
         executor.execute(task5);
         executor.execute(task6);
+        executor.execute(task7);
+        executor.execute(task8);
 
         executor.shutdown();
     }

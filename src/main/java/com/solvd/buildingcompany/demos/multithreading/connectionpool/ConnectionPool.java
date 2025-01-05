@@ -1,53 +1,42 @@
 package com.solvd.buildingcompany.demos.multithreading.connectionpool;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.sql.Connection;
-import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
 public class ConnectionPool {
-    private static final Logger logger = LogManager.getLogger(ConnectionPool.class.getName());
-    private List<Connection> connections;
-    private final int maxSize = 5;
-    private int activeConnections = 0;
+    private final BlockingQueue<Connection> connections;
+    private static final int MAX_SIZE = 5;
     private static ConnectionPool instance;
 
-    public ConnectionPool(List<Connection> initialConnections) {
-        if (initialConnections == null || initialConnections.isEmpty()) {
-            throw new IllegalArgumentException("Initial connections list cannot be null or empty");
+    private ConnectionPool() {
+        this.connections = new ArrayBlockingQueue<>(MAX_SIZE);
+        for (int i = 0; i < MAX_SIZE; i++) {
+            connections.add(new MockConnection());
         }
-        this.connections = initialConnections;
     }
 
-    public static ConnectionPool getInstance(List<Connection> initialConnections) {
+    public static ConnectionPool getInstance() {
         if (instance == null) {
-            instance = new ConnectionPool(initialConnections);
+            instance = new ConnectionPool();
         }
         return instance;
     }
 
-    public synchronized Connection getConnection() {
-        while (connections.isEmpty() || activeConnections >= maxSize) {
-            try {
-                logger.info("{}: Waiting for available connection...", Thread.currentThread().getName());
-                wait();
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                throw new RuntimeException("Thread was interrupted while waiting for a connection", e);
-            }
+    public Connection getConnection() {
+        try {
+            return connections.take();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException("Connection waiting interrupted", e);
         }
-        activeConnections++;
-        return connections.removeLast();
     }
 
-    public synchronized void releaseConnection(Connection connection) {
-        if (connection != null) {
+    public void releaseConnection(Connection connection) {
             connections.add(connection);
-        }
     }
 
-    public synchronized int getAvailableConnections() {
+    public int getAvailableConnections() {
         return connections.size();
     }
 }

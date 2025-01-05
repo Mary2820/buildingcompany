@@ -20,15 +20,18 @@ public class ConnectionTask implements Runnable {
     public void run() {
         MockConnection connection = null;
         try {
+            if (pool.getAvailableConnections() == 0) {
+                logger.info("{}: No available connections. Waiting for connection...", threadName);
+            }
             connection = (MockConnection) pool.getConnection();
-            logger.info("{}: Mock connection obtained!", threadName);
+            logger.info("{}: Connection obtained!", threadName);
             Thread.sleep(workDuration);
         } catch (Exception e) {
             logger.error("{}: Error: {}", threadName, e.getMessage());
         } finally {
             if (connection != null) {
                 pool.releaseConnection(connection);
-                logger.info("{}: Mock connection released!", threadName);
+                logger.info("{}: Connection released!", threadName);
             }
         }
     }
